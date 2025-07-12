@@ -302,6 +302,8 @@
             }
         }
     </style>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4079864099211134"
+      crossorigin="anonymous"></script>
 </head>
 <body>
     <header class="header">
@@ -319,16 +321,13 @@
                 <a href="#anime" class="filter-btn" data-filter="anime">Anime</a>
                 <a href="#nsfw" class="filter-btn" data-filter="nsfw">NSFW</a>
                 <a href="#accion" class="filter-btn" data-filter="accion">Acción</a>
-                <!-- Puedes agregar más categorías aquí si lo necesitas -->
-                <!-- <a href="#accion" class="filter-btn" data-filter="accion">Acción</a> -->
-            </div>
+                </div>
         </div>
     </header>
     
     <main class="main-content">
         <div class="comics-grid" id="comicsGrid">
-            <!-- Comics will be loaded here -->
-        </div>
+            </div>
         <div class="loading" id="loading" style="display: none;">
             Cargando más comics...
         </div>
@@ -575,7 +574,7 @@
             const filteredComics = comicsData.filter(comic => {
                 const inCategory = currentFilter === 'general' || comic.category === currentFilter;
                 const matchesSearch = comic.title.toLowerCase().includes(searchTerm) || 
-                                      comic.author.toLowerCase().includes(searchTerm);
+                                            comic.author.toLowerCase().includes(searchTerm);
                 return inCategory && matchesSearch;
             });
             
