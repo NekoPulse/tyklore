@@ -1,0 +1,610 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tyklore</title>
+    <link rel="icon" href="favicon.ico">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Segoe+UI:wght@400;600;700&display=swap');
+
+        @font-face {
+            font-family: 'Claude Sans';
+            src: url('fonts/ClaudeSansPlain.ttf') format('truetype');
+            font-weight: normal;
+            font-style: normal;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Claude Sans', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f5f5f5;
+            color: #333;
+            line-height: 1.4;
+        }
+        
+        /* Header */
+        .header {
+            background: #ffffff;
+            border-bottom: 1px solid #d1d5db;
+            padding: 20px 0;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+        
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .title-section {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 24px;
+        }
+        
+        .logo-icon {
+            width: 32px;
+            height: 32px;
+        }
+        
+        .title {
+            font-size: 24px;
+            font-weight: 600;
+            color: #1f2937;
+            letter-spacing: -0.5px;
+        }
+        
+        /* Search Bar */
+        .search-container {
+            margin-bottom: 20px;
+        }
+        
+        .search-bar {
+            width: 100%;
+            max-width: 400px;
+            padding: 8px 12px;
+            border: 1px solid #d1d5db;
+            border-radius: 6px;
+            background: #ffffff;
+            color: #374151;
+            font-size: 14px;
+            transition: border-color 0.2s ease;
+        }
+        
+        .search-bar:focus {
+            outline: none;
+            border-color: #3b82f6;
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+        }
+        
+        .search-bar::placeholder {
+            color: #9ca3af;
+        }
+        
+        /* Filter Buttons */
+        .filter-container {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+        
+        .filter-btn {
+            padding: 6px 12px;
+            border: 1px solid #d1d5db;
+            border-radius: 6px;
+            background: #ffffff;
+            color: #374151;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            text-decoration: none;
+            font-size: 13px;
+            font-weight: 500;
+        }
+        
+        .filter-btn:hover {
+            background: #f3f4f6;
+            border-color: #9ca3af;
+        }
+        
+        .filter-btn.active {
+            background: #3b82f6;
+            border-color: #3b82f6;
+            color: #ffffff;
+        }
+        
+        /* Main Content */
+        .main-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 24px 20px;
+        }
+        
+        /* Comics Grid */
+        .comics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(500px, 1fr));
+            gap: 16px;
+            margin-top: 16px;
+        }
+        
+        .comic-card {
+            background: #ffffff;
+            border: 1px solid #e5e7eb;
+            border-radius: 8px;
+            padding: 16px;
+            display: flex;
+            gap: 16px;
+            transition: all 0.2s ease;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+        
+        .comic-card:hover {
+            border-color: #d1d5db;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        
+        .comic-image {
+            width: 100px;
+            height: 130px;
+            border-radius: 4px;
+            object-fit: cover;
+            border: 1px solid #e5e7eb;
+        }
+        
+        .comic-info {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+        
+        .comic-title-author {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+        
+        .comic-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: #1f2937;
+        }
+        
+        .title-separator {
+            color: #9ca3af;
+            font-size: 16px;
+        }
+        
+        .comic-author {
+            color: #6b7280;
+            font-size: 14px;
+        }
+        
+        .comic-stats {
+            display: flex;
+            gap: 16px;
+            color: #6b7280;
+            font-size: 13px;
+        }
+        
+        .stat-item {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+        
+        .stat-icon {
+            width: 16px;
+            height: 16px;
+        }
+        
+        .comic-actions {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+            margin-top: auto;
+        }
+        
+        .like-btn {
+            background: #ffffff;
+            border: 1px solid #d1d5db;
+            color: #6b7280;
+            border-radius: 6px;
+            width: 32px;
+            height: 32px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .like-btn:hover {
+            background: #f3f4f6;
+            border-color: #9ca3af;
+        }
+        
+        .like-btn.liked {
+            background: #fef2f2;
+            border-color: #fecaca;
+            color: #dc2626;
+        }
+        
+        .like-icon {
+            width: 16px;
+            height: 16px;
+        }
+        
+        .download-btn {
+            background: #3b82f6;
+            color: white;
+            border: none;
+            padding: 6px 12px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 13px;
+            font-weight: 500;
+            transition: all 0.2s ease;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+        }
+        
+        .download-btn:hover {
+            background: #2563eb;
+        }
+        
+        .download-icon {
+            width: 14px;
+            height: 14px;
+        }
+        
+        /* Loading indicator */
+        .loading {
+            text-align: center;
+            padding: 20px;
+            font-size: 14px;
+            color: #6b7280;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .comics-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .comic-card {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .comic-image {
+                width: 80px;
+                height: 110px;
+                margin: 0 auto;
+            }
+            
+            .title {
+                font-size: 20px;
+            }
+            
+            .filter-container {
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="header-content">
+            <div class="title-section">
+                <h1 class="title">Tyklore</h1>
+            </div>
+            
+            <div class="search-container">
+                <input type="text" class="search-bar" placeholder="Buscar comics..." id="searchInput">
+            </div>
+            
+            <div class="filter-container">
+                <a href="#general" class="filter-btn active" data-filter="general">General</a>
+                <a href="#anime" class="filter-btn" data-filter="anime">Anime</a>
+                <a href="#nsfw" class="filter-btn" data-filter="nsfw">NSFW</a>
+                <a href="#accion" class="filter-btn" data-filter="accion">Acción</a>
+                <!-- Puedes agregar más categorías aquí si lo necesitas -->
+                <!-- <a href="#accion" class="filter-btn" data-filter="accion">Acción</a> -->
+            </div>
+        </div>
+    </header>
+    
+    <main class="main-content">
+        <div class="comics-grid" id="comicsGrid">
+            <!-- Comics will be loaded here -->
+        </div>
+        <div class="loading" id="loading" style="display: none;">
+            Cargando más comics...
+        </div>
+    </main>
+
+    <a href="https://www.dmca.com/Protection/Status.aspx?ID=your-id-aqui" title="DMCA.com Protection Status" class="dmca-badge">
+        <img src="https://images.dmca.com/Badges/dmca_protected_16_120.png?ID=your-id-aqui" alt="DMCA.com Protection Status">
+      </a>
+      <script src="https://images.dmca.com/Badges/DMCABadgeHelper.min.js"></script>      
+    
+    <script>
+        // Sample comic data
+        const comicsData = [
+            {
+                id: 1,
+                title: "The Ahengers",
+                author: "Justin Anderson",
+                image: "the-ahengers-1-450x635.webp",
+                downloads: Math.floor(Math.random() * 10000) + 1000,
+                views: Math.floor(Math.random() * 50000) + 5000,
+                category: "nsfw",
+                downloadLink: "the-ahengers.pdf"
+            },
+            {
+                id: 2,
+                title: "Happosai`s Revenge",
+                author: "Justin Anderson",
+                image: "happosais-revenge-1-450x636.webp",
+                downloads: Math.floor(Math.random() * 10000) + 1000,
+                views: Math.floor(Math.random() * 50000) + 5000,
+                category: "nsfw",
+                downloadLink: "happosais-revenge.pdf"
+            },
+            {
+                id: 3,
+                title: "La Dragona Que Me Vuelve Loco",
+                author: "Justin Anderson",
+                image: "la-dragona-que-me-vuelve-loco-450x595.webp",
+                downloads: Math.floor(Math.random() * 10000) + 1000,
+                views: Math.floor(Math.random() * 50000) + 5000,
+                category: "nsfw",
+                downloadLink: "la-dragona-que-me-vuelve-loco.pdf"
+            },
+            {
+                id: 4,
+                title: "Sailor Moon Venus",
+                author: "Justin Anderson",
+                image: "sailor-moon-hotel-venus-3-450x651.webp",
+                downloads: Math.floor(Math.random() * 10000) + 1000,
+                views: Math.floor(Math.random() * 50000) + 5000,
+                category: "nsfw",
+                downloadLink: "sailor-moon-hotel-venus.pdf"
+            },
+            {
+                id: 5,
+                title: "Hazbin Hotel Deavalin",
+                author: "Justin Anderson",
+                image: "hazbin-sex-hotel-450x636.webp",
+                downloads: Math.floor(Math.random() * 10000) + 1000,
+                views: Math.floor(Math.random() * 50000) + 5000,
+                category: "nsfw",
+                downloadLink: "hazbin-sex-hotel-deavalin.pdf"
+            },
+            {
+                id: 6,
+                title: "La Perra De Pudding",
+                author: "Tyklore",
+                image: "la-perra-de-pudding.jpg",
+                downloads: Math.floor(Math.random() * 10000) + 1000,
+                views: Math.floor(Math.random() * 50000) + 5000,
+                category: "nsfw",
+                downloadLink: "la-perra-de-pudding.zip"
+            },
+            {
+                id: 7,
+                title: "No entiendo nada",
+                author: "grifotorcido",
+                image: "5YpPG2.png",
+                downloads: Math.floor(Math.random() * 10000) + 1000,
+                views: Math.floor(Math.random() * 50000) + 5000,
+                category: "general",
+                downloadLink: "https://files.catbox.moe/j3w0g6.pdf"
+            },
+            {
+                id: 8,
+                title: "Miscellaneous Comics from October to November",
+                author: "Alex Wren",
+                image: "zzWaxt.png",
+                downloads: Math.floor(Math.random() * 10000) + 1000,
+                views: Math.floor(Math.random() * 50000) + 5000,
+                category: "general",
+                downloadLink: "assortcomics.pdf"
+            },
+            {
+                id: 9,
+                title: "Veneno: Pira Funeraria",
+                author: "Carl Potts and Tom Lyle",
+                image: "veneno.jpg",
+                downloads: Math.floor(Math.random() * 10000) + 1000,
+                views: Math.floor(Math.random() * 50000) + 5000,
+                category: "accion",
+                downloadLink: "Pira-Funeraria.zip"
+            },
+            {
+                id: 10,
+                title: "A Good Boi",
+                author: "Mr.e Fernand",
+                image: "good-me-boi.jpg",
+                downloads: Math.floor(Math.random() * 10000) + 1000,
+                views: Math.floor(Math.random() * 50000) + 5000,
+                category: "nsfw",
+                downloadLink: "a-good-boi.zip"
+            },
+            {
+                id: 11,
+                title: "Northstart",
+                author: "Simon Furman",
+                image: "nort.jpg",
+                downloads: Math.floor(Math.random() * 10000) + 1000,
+                views: Math.floor(Math.random() * 50000) + 5000,
+                category: "accion",
+                downloadLink: "estrella-del-norte.zip"
+            },
+            {
+                id: 12,
+                title: "Jisatsu Circle",
+                author: "Usumaru Furuya",
+                image: "jisatsu.jpg",
+                downloads: Math.floor(Math.random() * 10000) + 1000,
+                views: Math.floor(Math.random() * 50000) + 5000,
+                category: "anime",
+                downloadLink: "jijatsu-cicle.zip"
+            },
+        ];
+        
+        let displayedComics = [];
+        let currentFilter = 'general';
+        let currentPage = 0;
+        const comicsPerPage = 6;
+        
+        function createComicCard(comic) {
+            return `
+                <div class="comic-card">
+                    <img src="${comic.image}" alt="${comic.title}" class="comic-image">
+                    <div class="comic-info">
+                        <div class="comic-title-author">
+                            <span class="comic-title">${comic.title}</span>
+                            <span class="title-separator">|</span>
+                            <span class="comic-author">${comic.author}</span>
+                        </div>
+                        <div class="comic-stats">
+                            <div class="stat-item">
+                                <svg class="stat-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                                    <polyline points="7,10 12,15 17,10"/>
+                                    <line x1="12" y1="15" x2="12" y2="3"/>
+                                </svg>
+                                <span>${comic.downloads.toLocaleString()}</span>
+                            </div>
+                            <div class="stat-item">
+                                <svg class="stat-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
+                                    <circle cx="12" cy="12" r="3"/>
+                                </svg>
+                                <span>${comic.views.toLocaleString()}</span>
+                            </div>
+                        </div>
+                        <div class="comic-actions">
+                            <button class="like-btn" onclick="toggleLike(this)">
+                                <svg class="like-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+                                </svg>
+                            </button>
+                            <a href="${comic.downloadLink}" class="download-btn" download>
+                                <svg class="download-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                                    <polyline points="7,10 12,15 17,10"/>
+                                    <line x1="12" y1="15" x2="12" y2="3"/>
+                                </svg>
+                                Download
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+        
+        function loadComics(append = false) {
+            const filteredComics = comicsData.filter(comic => 
+                currentFilter === 'general' || comic.category === currentFilter
+            );
+            const startIndex = currentPage * comicsPerPage;
+            const endIndex = startIndex + comicsPerPage;
+            const comicsToShow = filteredComics.slice(startIndex, endIndex);
+            
+            if (comicsToShow.length === 0) {
+                document.getElementById('loading').style.display = 'none';
+                return;
+            }
+            
+            const comicsGrid = document.getElementById('comicsGrid');
+            const comicsHTML = comicsToShow.map(createComicCard).join('');
+            
+            if (append) {
+                comicsGrid.innerHTML += comicsHTML;
+            } else {
+                comicsGrid.innerHTML = comicsHTML;
+                displayedComics = [];
+            }
+            
+            displayedComics.push(...comicsToShow);
+            currentPage++;
+            
+            document.getElementById('loading').style.display = 'none';
+        }
+        
+        function toggleLike(button) {
+            button.classList.toggle('liked');
+        }
+        
+        // Filter functionality
+        document.querySelectorAll('.filter-btn').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                e.preventDefault();
+                
+                // Remove active class from all buttons
+                document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+                
+                // Add active class to clicked button
+                btn.classList.add('active');
+                
+                // Update current filter
+                currentFilter = btn.dataset.filter;
+                currentPage = 0;
+                
+                // Load comics for new filter
+                loadComics(false);
+            });
+        });
+        
+        // Search functionality
+        document.getElementById('searchInput').addEventListener('input', (e) => {
+            const searchTerm = e.target.value.toLowerCase();
+            const filteredComics = comicsData.filter(comic => {
+                const inCategory = currentFilter === 'general' || comic.category === currentFilter;
+                const matchesSearch = comic.title.toLowerCase().includes(searchTerm) || 
+                                      comic.author.toLowerCase().includes(searchTerm);
+                return inCategory && matchesSearch;
+            });
+            
+            const comicsGrid = document.getElementById('comicsGrid');
+            comicsGrid.innerHTML = filteredComics.map(createComicCard).join('');
+        });
+        
+        // Infinite scroll
+        let isLoading = false;
+        
+        window.addEventListener('scroll', () => {
+            if (isLoading) return;
+            
+            const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+            const windowHeight = window.innerHeight;
+            const documentHeight = document.documentElement.scrollHeight;
+            
+            if (scrollTop + windowHeight >= documentHeight - 100) {
+                isLoading = true;
+                document.getElementById('loading').style.display = 'block';
+                setTimeout(() => {
+                    loadComics(true);
+                    isLoading = false;
+                }, 1000);
+            }
+        });
+        
+        // Initial load
+        loadComics();
+    </script>
+</body>
+</html>
