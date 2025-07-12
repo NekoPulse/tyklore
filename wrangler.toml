@@ -1,0 +1,6 @@
+name = "tyklore"
+main = "index.html"
+compatibility_date = "2024-07-11"
+
+[site]
+bucket = "."

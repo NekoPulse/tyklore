@@ -1,0 +1,245 @@
+@import url('https://fonts.googleapis.com/css2?family=Segoe+UI:wght@400;600;700&display=swap');
+
+@font-face {
+    font-family: 'Claude Sans';
+    src: url('fonts/ClaudeSansPlain.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Claude Sans', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: #f5f5f5;
+    color: #333;
+    line-height: 1.4;
+}
+
+/* Header */
+.header {
+    background: #ffffff;
+    border-bottom: 1px solid #d1d5db;
+    padding: 20px 0;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+.header-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.title-section {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 24px;
+}
+
+.logo-icon {
+    width: 32px;
+    height: 32px;
+}
+
+.title {
+    font-size: 24px;
+    font-weight: 600;
+    color: #1f2937;
+    letter-spacing: -0.5px;
+}
+
+/* Search Bar */
+.search-container {
+    margin-bottom: 20px;
+}
+
+.search-bar {
+    width: 100%;
+    max-width: 400px;
+    padding: 8px 12px;
+    border: 1px solid #d1d5db;
+    border-radius: 6px;
+    background: #ffffff;
+    color: #374151;
+    font-size: 14px;
+    transition: border-color 0.2s ease;
+}
+
+.search-bar:focus {
+    outline: none;
+    border-color: #3b82f6;
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+.search-bar::placeholder {
+    color: #9ca3af;
+}
+
+/* Filter Buttons */
+.filter-container {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.filter-btn {
+    padding: 6px 12px;
+    border: 1px solid #d1d5db;
+    border-radius: 6px;
+    background: #ffffff;
+    color: #374151;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 500;
+}
+
+.filter-btn:hover {
+    background: #f3f4f6;
+    border-color: #9ca3af;
+}
+
+.filter-btn.active {
+    background: #3b82f6;
+    border-color: #3b82f6;
+    color: #ffffff;
+}
+
+/* Main Content */
+.main-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 24px 20px;
+}
+
+/* Comics Grid */
+.comics-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(500px, 1fr));
+    gap: 16px;
+    margin-top: 16px;
+}
+
+.comic-card {
+    background: #ffffff;
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    padding: 16px;
+    display: flex;
+    gap: 16px;
+    transition: all 0.2s ease;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+.comic-card:hover {
+    border-color: #d1d5db;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+.comic-image {
+    width: 100px;
+    height: 130px;
+    border-radius: 4px;
+    object-fit: cover;
+    border: 1px solid #e5e7eb;
+}
+
+.comic-info {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.comic-title-author {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.comic-title {
+    font-size: 16px;
+    font-weight: 600;
+    color: #1f2937;
+}
+
+.title-separator {
+    color: #9ca3af;
+    font-size: 16px;
+}
+
+.comic-author {
+    color: #6b7280;
+    font-size: 14px;
+}
+
+.comic-stats {
+    display: flex;
+    gap: 16px;
+    color: #6b7280;
+    font-size: 13px;
+}
+
+.stat-item {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.comic-actions {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    margin-top: auto;
+}
+
+.action-btn {
+    padding: 4px 8px;
+    border: 1px solid #d1d5db;
+    border-radius: 4px;
+    background: #ffffff;
+    color: #4b5563;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 12px;
+    transition: all 0.2s ease;
+}
+
+.action-btn:hover {
+    background: #f3f4f6;
+}
+
+.action-btn.like-btn.liked {
+    background: #fef2f2;
+    border-color: #fecaca;
+    color: #dc2626;
+}
+
+.action-btn.like-btn.liked:hover {
+    background: #fee2e2;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .comics-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .comic-card {
+        flex-direction: column;
+    }
+    
+    .comic-image {
+        width: 100%;
+        height: 200px;
+    }
+}
